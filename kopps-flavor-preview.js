@@ -26,12 +26,17 @@ async function koppsFlavorPreview () {
     if (forecast) forecast += '\n'
     
     const weekday = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(addDays(new Date(), i)).toUpperCase(),
-          date = addDays(new Date(), i).getDate()
+          date = addDays(new Date(), i).getDate(),
+          nextDate = addDays(new Date(), i + 1).getDate()
 
     forecast += `${weekday}: | color=white | size=12 | href=https://kopps.com/flavor-preview#${date.toString().length === 1 ? '0' + date : date}`
     
     for (j = 0; j < flavors[i].length; j++) {
       forecast += `\n    ${flavors[i][j]} | color=${favoriteFlavors.includes(flavors[i][j]) ? '#22C55E' : '#F4F4F5'} | trim=false`
+    }
+
+    if (nextDate === 1) {
+      i = 7
     }
   }
 
